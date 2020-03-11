@@ -1,0 +1,53 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Dados do participante
+    </mat-panel-title>
+    <mat-panel-description>
+      {{infoParticipante}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Id do participante é obrigatório.">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Forneça seu ID</ng-template>
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Forneça seu Secret Code</ng-template>
+        <mat-form-field>
+          <mat-label>Secret</mat-label>
+          <input matInput placeholder="Ex. LLSA2Z" maxlength="6" autocomplete="off" autocorrect="off"
+            autocapitalize="off" spellcheck="false" #input (input)="input.value=$event.target.value.toUpperCase()"
+            formControlName="secondCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+          <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Concluído</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+        <button mat-raised-button color="primary" (click)="stepper.reset()">Refazer</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-expansion-panel>
+
+<div class="video-chapel">
+  <div class="legenda">{{legenda}}</div>
+  <video src="assets/video/chapel.mp4" type="video/mp4" autoplay loop muted></video>
+</div>

@@ -1,0 +1,38 @@
+.mat-form-field {
+    margin-top: 16px;
+}
+
+.mat-raised-button {
+ margin-right: 5px;
+}
+
+.mat-stepper-horizontal {
+  color: white;
+  background-color: black;
+}
+
+.video-chapel{
+  color: white;
+  position: relative;
+}
+
+.video-chapel video{
+  width: 100%;
+}
+
+mat-panel-title {
+  justify-content: center !important;
+}
+
+.mat-expansion-panel {
+  background-color: black;
+}
+
+.legenda {
+  background-color: rgba(123, 31, 162, 0.65);
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  top: 50%;
+}
