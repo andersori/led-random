@@ -8,18 +8,30 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class ContentComponent implements OnInit {
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  legenda : String = "Olá mundo!";
-  infoParticipante : String = "Clique aqui e forneça seus dados";
-  
+  participanteIdFormGroup: FormGroup;
+  participanteSecretFormGroup: FormGroup;
+
+  equipeUsernameFormGroup: FormGroup;
+  equipeSecretFormGroup: FormGroup;
+
+  legenda: String = "Olá mundo!";
+
+  infoParticipante: String = "Clique aqui e forneça seus dados";
+  infoEquipe: String = "Clique aqui e forneça seus dados";
+
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
+    this.participanteIdFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this._formBuilder.group({
+    this.participanteSecretFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+    this.equipeUsernameFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.equipeSecretFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
   }

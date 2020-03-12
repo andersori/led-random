@@ -1,7 +1,8 @@
+<mat-accordion>
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      Dados do participante
+      Dados do Participante
     </mat-panel-title>
     <mat-panel-description>
       {{infoParticipante}}
@@ -9,8 +10,8 @@
   </mat-expansion-panel-header>
 
   <mat-horizontal-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Id do participante é obrigatório.">
-      <form [formGroup]="firstFormGroup">
+    <mat-step [stepControl]="participanteIdFormGroup" errorMessage="Id do participante é obrigatório.">
+      <form [formGroup]="participanteIdFormGroup">
         <ng-template matStepLabel>Forneça seu ID</ng-template>
         <mat-form-field>
           <mat-label>ID</mat-label>
@@ -21,13 +22,13 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-      <form [formGroup]="secondFormGroup">
+    <mat-step [stepControl]="participanteSecretFormGroup" errorMessage="Address is required.">
+      <form [formGroup]="participanteSecretFormGroup">
         <ng-template matStepLabel>Forneça seu Secret Code</ng-template>
         <mat-form-field>
           <mat-label>Secret</mat-label>
           <input matInput placeholder="Ex. LLSA2Z" maxlength="6" autocomplete="off" autocorrect="off"
-            autocapitalize="off" spellcheck="false" #input (input)="input.value=$event.target.value.toUpperCase()"
+            autocapitalize="off" spellcheck="false" #secretParticipant (input)="secretParticipant.value=$event.target.value.toUpperCase()"
             formControlName="secondCtrl" required>
         </mat-form-field>
         <div>
@@ -46,6 +47,57 @@
     </mat-step>
   </mat-horizontal-stepper>
 </mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Dados da Equipe
+    </mat-panel-title>
+    <mat-panel-description>
+      {{infoEquipe}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <p>Forneça esses dados somente se sua equipe já estiver definida.</p>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="equipeUsernameFormGroup" errorMessage="Username da equipe é obrigatório.">
+      <form [formGroup]="equipeUsernameFormGroup">
+        <ng-template matStepLabel>Forneça o Username</ng-template>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput type="number" autocomplete="off" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="equipeSecretFormGroup" errorMessage="Address is required.">
+      <form [formGroup]="equipeSecretFormGroup">
+        <ng-template matStepLabel>Forneça seu Secret Code</ng-template>
+        <mat-form-field>
+          <mat-label>Secret</mat-label>
+          <input matInput placeholder="Ex. LLSA2Z" maxlength="6" autocomplete="off" autocorrect="off"
+            autocapitalize="off" spellcheck="false" #secretTeam (input)="secretTeam.value=$event.target.value.toUpperCase()"
+            formControlName="secondCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+          <button mat-raised-button color="primary" matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Concluído</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+        <button mat-raised-button color="primary" (click)="stepper.reset()">Refazer</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-expansion-panel>
+</mat-accordion>
 
 <div class="video-chapel">
   <div class="legenda">{{legenda}}</div>
