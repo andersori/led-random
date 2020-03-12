@@ -2,6 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Participante, ParticipanteService } from '../participante.service';
 import { Equipe, EquipeService } from '../equipe.service';
+import { Grupo, GrupoService } from '../grupo.service';
+
+interface MSG {
+  msg: String;
+  time: number;
+}
 
 @Component({
   selector: 'app-content',
@@ -34,8 +40,9 @@ export class ContentComponent implements OnInit {
 
   participante: Participante = null;
   equipe: Equipe = null;
+  grupo: Grupo = null;
 
-  constructor(private _formBuilder: FormBuilder, private participanteService: ParticipanteService, private equipeService: EquipeService) {
+  constructor(private _formBuilder: FormBuilder, private participanteService: ParticipanteService, private equipeService: EquipeService, private grupoService: GrupoService) {
     this.participanteIdFormGroup = this._formBuilder.group({
       partiID: ['', Validators.required]
     });
@@ -55,8 +62,10 @@ export class ContentComponent implements OnInit {
   }
 
   public resetInfoParticipante() {
+    this.legenda = "Olá mundo!";
     this.participante = null;
     this.equipe = null;
+    this.grupo = null;
     this.infoParticipante = "Clique aqui e forneça seus dados";
     this.infoEquipe = "Clique aqui e forneça seus dados";
     this.stepperParti.reset();
@@ -71,17 +80,12 @@ export class ContentComponent implements OnInit {
   public requisitarEquipe() {
     this.expansionParti = false;
 
-    interface MSG {
-      msg: String;
-      time: number;
-    }
-
     const frases_iniciais: MSG[] = [
       { msg: '...', time: 1300 },
-      { msg: 'Ummm!', time: 1000 },
-      { msg: 'Parece que você não faz parte de uma casa ainda.', time: 1100 },
-      { msg: 'Nem de uma equipe.', time: 2400 },
-      { msg: 'Então deixe-me te analisar.', time: 1300 }
+      { msg: 'Ummm!', time: 1500 },
+      { msg: 'Parece que você não faz parte de uma casa ainda.', time: 1800 },
+      { msg: 'Nem de uma equipe.', time: 2700 },
+      { msg: 'Então deixe-me te analisar.', time: 2600 }
     ];
 
     let frases_do_chapeu: MSG[] = [
@@ -91,10 +95,9 @@ export class ContentComponent implements OnInit {
       { msg: 'Já sei.', time: 1600 },
       { msg: 'Difícil. Muito difícil.', time: 2200 },
       { msg: 'Tem muita coragem, estou vendo.', time: 2600 },
-      { msg: 'Tem Uma mente nada má também.', time: 2600 },
-      { msg: 'Tem talento, se tem...', time: 2000 },
+      { msg: 'Tem uma mente nada má também.', time: 2600 },
       { msg: 'Tem talento, se tem.', time: 2000 },
-      { msg: 'E uma sede de provar seu valor.', time: 2300 },
+      { msg: 'Possui uma sede de provar seu valor.', time: 2800 },
       { msg: 'Mas onde vou colocá-lo?.', time: 1900 },
       { msg: 'Sonserina não?', time: 1600 },
       { msg: 'A Sonserina iria ajudá-lo a alcançar essa grandeza.', time: 2600 },
@@ -126,9 +129,10 @@ export class ContentComponent implements OnInit {
               } else {
                 setTimeout(async function () {
                   context.participante = await context.participanteService.randomEquipeParti(context.participante.id, context.participante.secret);
-                  context.equipe = await context.equipeService.getEquipe(context.participante.idEvent, null);
+                  context.equipe = await context.equipeService.getEquipe(context.participante.idTeam, null);
+                  context.grupo = await context.grupoService.getTeam(context.equipe.groupId);
                   context.infoEquipe = `Equipe ${context.equipe.name}`;
-                  context.legenda = `Bem vindo a equipe ${context.equipe.name}`;
+                  context.legenda = `Bem vindo a equipe ${context.equipe.name} e ao grupo ${context.grupo.name}`;
                 }, time);
               }
             }
@@ -155,6 +159,7 @@ export class ContentComponent implements OnInit {
 
       if (this.participante.idTeam != null) {
         this.equipe = await this.equipeService.getEquipe(this.participante.idTeam, null);
+        this.grupo = await this.grupoService.getTeam(this.equipe.groupId);
         this.infoEquipe = `Equipe ${this.equipe.name}.`;
       }
 
@@ -173,6 +178,7 @@ export class ContentComponent implements OnInit {
         this.msgParti = `Olá ${this.participante.name.split(' ')[0]}. Você ainda não faz parte de uma equipe. Requisite uma equipe.`
       } else {
         this.msgParti = `Você faz parte da equipe ${this.equipe.name}.`
+        this.legenda = `Olá ${this.participante.name.split(' ')[0]}. Você faz parte da equipe ${this.equipe.name}.`
       }
     } else {
       this.msgParti = "Não foi possível determinar quem é você, verifique seu id e secret e tente novamente.";
