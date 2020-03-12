@@ -17,11 +17,13 @@ export class ParticipanteService {
 
   constructor(private http: HttpClient) { }
 
-  public getParticipante(id : Number, secret : String) : Participante {
-    this.http.get<Participante>(environment.apiUrl + `public/participant/${id}?secret=${secret}`,  { responseType: 'text' as 'json' })
-    .subscribe(data => {
-      console.log(data);
-    });
-    return null;
+  public async getParticipante(id: Number, secret: String): Promise<Participante> {
+    return await this.http.get<Participante>(environment.apiUrl + `/public/participant/${id}?secret=${secret}`)
+    .toPromise();
+  }
+
+  public async randomEquipeParti(id: Number, secret: String): Promise<Participante> {
+    return await this.http.post<Participante>(environment.apiUrl + `/public/participant/${id}/random?secret=${secret}`, null)
+    .toPromise();
   }
 }

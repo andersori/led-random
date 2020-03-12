@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Participante } from './participante.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 export interface Equipe {
   id: Number,
   verified: Boolean,
   score: Number,
   secret: String,
-  participants: Participante[],
+  participants: String[],
   groupId: Number,
   name: String,
   eventId: Number
@@ -19,4 +19,14 @@ export interface Equipe {
 export class EquipeService {
 
   constructor(private http: HttpClient) { }
+
+  public async getEquipe(id: Number, secret: String): Promise<Equipe> {
+    if (secret != null) {
+      return await this.http.get<Equipe>(environment.apiUrl + `/public/teams/${id}?secret=${secret}`)
+        .toPromise();
+    } else {
+      return await this.http.get<Equipe>(environment.apiUrl + `/public/teams/${id}`)
+        .toPromise();
+    }
+  }
 }

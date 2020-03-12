@@ -14,6 +14,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpClientModule } from '@angular/common/http'; 
+
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    HttpClientModule
   ],
   providers: [FormBuilder, {
     provide: STEPPER_GLOBAL_OPTIONS,
