@@ -106,19 +106,32 @@
       </mat-horizontal-stepper>
     </div>
 
-    <div *ngIf="participante != null && equipe != null">
-      <p>Sua equipe se chama {{equipe?.name}} e faz parte do grupo {{grupo?.name}}.</p>
-      <p>Os participantes atuais da sua equipe são:</p>
-      <ul>
-        <li *ngFor="let pt of equipe.participants">
-          {{pt}}
-        </li>
-      </ul>
+    <div *ngIf="participante != null && equipe != null" style="display: flex;justify-content: space-between;">
+      <div>
+        <p>Sua equipe se chama {{equipe?.name}}.</p>
+        <p>Os participantes atuais da sua equipe são:</p>
+        <ul>
+          <li *ngFor="let pt of equipe.participants">
+            {{pt}}
+          </li>
+        </ul>
+      </div>
+      <div>
+        <p>Seu grupo é o {{grupo?.name}}.</p>
+        <p>As equipes atuais do grupo {{grupo?.name}} são:</p>
+        <ul>
+          <li *ngFor="let tm of grupo.teams">
+            {{tm}}
+          </li>
+        </ul>
+      </div>
     </div>
   </mat-expansion-panel>
 </mat-accordion>
 
 <div class="video-chapel">
   <div class="legenda">{{legenda}}</div>
-  <video src="assets/video/chapel.mp4" type="video/mp4" autoplay loop muted></video>
+  <video autoplay="autoplay" loop muted>
+    <source src="assets/video/chapel.mp4" type="video/mp4">
+  </video>
 </div>

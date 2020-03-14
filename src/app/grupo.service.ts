@@ -5,7 +5,8 @@ import { environment } from 'src/environments/environment';
 export interface Grupo {
   id: Number,
   eventId: Number,
-  name: String
+  name: String,
+  teams: String[]
 }
 
 @Injectable({

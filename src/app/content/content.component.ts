@@ -98,9 +98,9 @@ export class ContentComponent implements OnInit {
       { msg: 'Tem uma mente nada má também.', time: 2600 },
       { msg: 'Tem talento, se tem.', time: 2000 },
       { msg: 'Possui uma sede de provar seu valor.', time: 2800 },
-      { msg: 'Mas onde vou colocá-lo?.', time: 1900 },
+      { msg: 'Onde devo colocá-lo?', time: 1900 },
       { msg: 'Sonserina não?', time: 1600 },
-      { msg: 'A Sonserina iria ajudá-lo a alcançar essa grandeza.', time: 2600 },
+      { msg: 'A Sonserina iria ajudá-lo a alcançar a sua grandeza.', time: 2800 },
     ];
 
     let maxMsgChapel = 5;
@@ -109,7 +109,6 @@ export class ContentComponent implements OnInit {
         if (i < frases_iniciais.length) {
           setTimeout(async function () {
             context.legenda = frases_iniciais[i].msg;
-            console.log(context.legenda);
             await inicio(i + 1)
           }, frases_iniciais[i].time);
         } else if (maxMsgChapel >= 0) {
@@ -122,8 +121,6 @@ export class ContentComponent implements OnInit {
                   const timeOutMsg = frases_do_chapeu[index].time;
                   context.legenda = frases_do_chapeu[index].msg;
                   frases_do_chapeu.splice(index, 1);
-                  console.log(frases_do_chapeu.length)
-                  console.log(context.legenda);
                   await chapel(timeOutMsg);
                 }, time);
               } else {
@@ -131,6 +128,7 @@ export class ContentComponent implements OnInit {
                   context.participante = await context.participanteService.randomEquipeParti(context.participante.id, context.participante.secret);
                   context.equipe = await context.equipeService.getEquipe(context.participante.idTeam, null);
                   context.grupo = await context.grupoService.getTeam(context.equipe.groupId);
+                  context.msgParti = `Você faz parte da equipe ${context.equipe.name}.`
                   context.infoEquipe = `Equipe ${context.equipe.name}`;
                   context.legenda = `Bem vindo a equipe ${context.equipe.name} e ao grupo ${context.grupo.name}`;
                 }, time);
