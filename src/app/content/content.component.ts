@@ -70,6 +70,7 @@ export class ContentComponent implements OnInit {
     this.participante = null;
     this.equipe = null;
     this.grupo = null;
+    this.msgParti = " ";
     this.infoParticipante = "Clique aqui e forneça seus dados";
     this.infoEquipe = "Clique aqui e forneça seus dados";
     this.stepperParti.reset();
@@ -80,6 +81,7 @@ export class ContentComponent implements OnInit {
     this.equipe = null;
     this.grupo = null;
     this.infoEquipe = "Clique aqui e forneça seus dados";
+    this.msgEquipe = " ";
     this.stepperEquipe.reset();
   }
 
@@ -201,12 +203,13 @@ export class ContentComponent implements OnInit {
                   context.grupo = await context.grupoService.getTeam(context.equipe.groupId);
 
                   let msgTemp = `Você faz parte da casa ${context.grupo.name}.`;
-                  if (context.grupo.teams.length > 0) {
-                    for (var i = 0; i < context.grupo.teams.length; i++) {
-                      if(context.grupo.teams[i].name === context.equipe.name){
-                        context.grupo.teams.splice(i, 1);
-                      }
+                  for (var i = 0; i < context.grupo.teams.length; i++) {
+                    if (context.grupo.teams[i].name === context.equipe.name) {
+                      context.grupo.teams.splice(i, 1);
                     }
+                  }
+
+                  if (context.grupo.teams.length > 0) {
                     msgTemp = msgTemp.substring(0, msgTemp.length - 1) + ' junto com a(s) seguinte(s) equipe(s): ';
                     context.grupo.teams.forEach(element => {
                       msgTemp += element.name + ', ';
@@ -298,7 +301,7 @@ export class ContentComponent implements OnInit {
         let msgTemp = `Você faz parte da casa ${this.grupo.name}.`;
         if (this.grupo != null) {
           for (var i = 0; i < this.grupo.teams.length; i++) {
-            if(this.grupo.teams[i].name === this.equipe.name){
+            if (this.grupo.teams[i].name === this.equipe.name) {
               this.grupo.teams.splice(i, 1);
             }
           }
