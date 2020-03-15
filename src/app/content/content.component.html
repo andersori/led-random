@@ -94,7 +94,7 @@
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Concluído</ng-template>
-          <mat-spinner *ngIf="participanteIsLoading" diameter="30"></mat-spinner>
+          <mat-spinner *ngIf="equipeIsLoading" diameter="30"></mat-spinner>
           <p>{{msgEquipe}}</p>
           <div>
             <button mat-raised-button color="primary" matStepperPrevious *ngIf="erroEquipe">Anterior</button>
