@@ -29,4 +29,9 @@ export class EquipeService {
         .toPromise();
     }
   }
+
+  public async randomGrupo(id: Number, secret: String): Promise<Equipe> {
+    return await this.http.post<Equipe>(environment.apiUrl + `/public/teams/${id}/random?secret=${secret}`, null)
+    .toPromise();
+  }
 }

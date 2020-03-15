@@ -62,7 +62,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <div *ngIf="equipe === null">
+    <div *ngIf="participante === null || equipe === null">
       <p>Forneça esses dados somente se sua equipe já estiver definida.</p>
       <mat-horizontal-stepper linear #stepperEquipe>
         <mat-step [stepControl]="equipeIdFormGroup" errorMessage="ID da equipe é obrigatório.">
@@ -98,8 +98,9 @@
           <p>{{msgEquipe}}</p>
           <div>
             <button mat-raised-button color="primary" matStepperPrevious *ngIf="erroEquipe">Anterior</button>
-            <button mat-raised-button color="primary" *ngIf="!erroEquipe" (click)="requisitarGrupo()">Requisitar
-              Grupo</button>
+            <button mat-raised-button color="primary" *ngIf="!erroEquipe && grupo === null"
+              (click)="requisitarGrupo()">Requisitar
+              Casa</button>
             <button mat-raised-button color="primary" (click)="resetInfoEquipe()">Refazer</button>
           </div>
         </mat-step>
@@ -116,14 +117,22 @@
           </li>
         </ul>
       </div>
-      <div>
-        <p>Seu grupo é o {{grupo?.name}}.</p>
-        <p>As equipes atuais do grupo {{grupo?.name}} são:</p>
-        <ul>
-          <li *ngFor="let tm of grupo.teams">
-            {{tm}}
-          </li>
-        </ul>
+      <div style="text-align: right;">
+        <p>Sua casa é a {{grupo?.name}}.</p>
+        <p>As equipes atuais da casa {{grupo?.name}} são:</p>
+        <mat-expansion-panel *ngFor="let tm of grupo?.teams">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{tm.name}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p *ngIf="tm?.participants.length === 0">
+            Ninguém por enquanto
+          </p>
+          <p *ngFor="let pName of tm?.participants">
+            {{pName.split(' ')[0]}}
+          </p>
+        </mat-expansion-panel>
       </div>
     </div>
   </mat-expansion-panel>
