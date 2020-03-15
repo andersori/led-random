@@ -22,7 +22,7 @@ export class EquipeService {
 
   public async getEquipe(id: Number, secret: String): Promise<Equipe> {
     if (secret != null) {
-      return await this.http.get<Equipe>(environment.apiUrl + `/public/teams/${id}?secret=${secret}`)
+      return await this.http.get<Equipe>(environment.apiUrl + `/public/teams/${id}?secret=${secret.toUpperCase}`)
         .toPromise();
     } else {
       return await this.http.get<Equipe>(environment.apiUrl + `/public/teams/${id}`)
@@ -31,7 +31,7 @@ export class EquipeService {
   }
 
   public async randomGrupo(id: Number, secret: String): Promise<Equipe> {
-    return await this.http.post<Equipe>(environment.apiUrl + `/public/teams/${id}/random?secret=${secret}`, null)
+    return await this.http.post<Equipe>(environment.apiUrl + `/public/teams/${id}/random?secret=${secret.toUpperCase}`, null)
     .toPromise();
   }
 }
