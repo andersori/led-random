@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Participante, ParticipanteService } from '../participante.service';
 import { Equipe, EquipeService } from '../equipe.service';
@@ -14,10 +14,11 @@ interface MSG {
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, AfterViewInit {
 
   @ViewChild('stepperParticipante') stepperParti;
   @ViewChild('stepperEquipe') stepperEquipe;
+  @ViewChild('videoChapel') video : ElementRef;
 
   outrasEquipesInfo: Equipe[] = []
 
@@ -60,9 +61,12 @@ export class ContentComponent implements OnInit {
       equipeSecret: ['', Validators.required]
     });
   }
+  ngAfterViewInit(): void {
+    this.video.nativeElement.play();
+  }
 
   ngOnInit() {
-
+    
   }
 
   public resetInfoParticipante() {
