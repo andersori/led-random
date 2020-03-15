@@ -63,7 +63,7 @@
     </mat-expansion-panel-header>
 
     <div *ngIf="participante === null || equipe === null">
-      <p>Forneça esses dados somente se sua equipe já estiver definida.</p>
+      <p>Forneça esses dados somente se sua equipe não fizer parte de um grupo.</p>
       <mat-horizontal-stepper linear #stepperEquipe>
         <mat-step [stepControl]="equipeIdFormGroup" errorMessage="ID da equipe é obrigatório.">
           <form [formGroup]="equipeIdFormGroup">
