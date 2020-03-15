@@ -61,7 +61,10 @@ export class ContentComponent implements OnInit, AfterViewInit {
       equipeSecret: ['', Validators.required]
     });
   }
+  
   ngAfterViewInit(): void {
+    this.video.nativeElement.muted = true;
+    this.video.nativeElement.autoplay = true;
     this.video.nativeElement.play();
   }
 
