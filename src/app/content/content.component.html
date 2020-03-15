@@ -44,7 +44,7 @@
         <p>{{msgParti}}</p>
         <div>
           <button mat-raised-button color="primary" matStepperPrevious *ngIf="erroParti">Anterior</button>
-          <button mat-raised-button color="primary" *ngIf="!erroParti && equipe === null"
+          <button mat-raised-button color="primary" *ngIf="!erroParti && equipe === null && !participanteIsLoading"
             (click)="requisitarEquipe()">Requisitar Equipe</button>
           <button mat-raised-button color="primary" (click)="resetInfoParticipante()">Refazer</button>
         </div>
@@ -98,7 +98,7 @@
           <p>{{msgEquipe}}</p>
           <div>
             <button mat-raised-button color="primary" matStepperPrevious *ngIf="erroEquipe">Anterior</button>
-            <button mat-raised-button color="primary" *ngIf="!erroEquipe && grupo === null"
+            <button mat-raised-button color="primary" *ngIf="!erroEquipe && grupo === null && !equipeIsLoading"
               (click)="requisitarGrupo()">Requisitar
               Casa</button>
             <button mat-raised-button color="primary" (click)="resetInfoEquipe()">Refazer</button>
