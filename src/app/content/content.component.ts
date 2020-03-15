@@ -233,6 +233,7 @@ export class ContentComponent implements OnInit {
   public async verifyParticipant() {
     this.resetInfoEquipe();
     this.participanteIsLoading = true;
+    this.msgParti = " ";
 
     const id: Number = this.participanteIdFormGroup.get('partiID').value;
     const secret: String = this.participanteSecretFormGroup.get('partiSecret').value;
@@ -274,6 +275,7 @@ export class ContentComponent implements OnInit {
 
   public async verifyTeam() {
     this.equipeIsLoading = true;
+    this.msgEquipe = " ";
 
     const id: Number = this.equipeIdFormGroup.get('equipeId').value;
     const secret: String = this.equipeSecretFormGroup.get('equipeSecret').value;
