@@ -18,12 +18,12 @@ export class ParticipanteService {
   constructor(private http: HttpClient) { }
 
   public async getParticipante(id: Number, secret: String): Promise<Participante> {
-    return await this.http.get<Participante>(environment.apiUrl + `/public/participant/${id}?secret=${secret.toUpperCase}`)
+    return await this.http.get<Participante>(environment.apiUrl + `/public/participant/${id}?secret=${secret.toUpperCase()}`)
     .toPromise();
   }
 
   public async randomEquipeParti(id: Number, secret: String): Promise<Participante> {
-    return await this.http.post<Participante>(environment.apiUrl + `/public/participant/${id}/random?secret=${secret.toUpperCase}`, null)
+    return await this.http.post<Participante>(environment.apiUrl + `/public/participant/${id}/random?secret=${secret.toUpperCase()}`, null)
     .toPromise();
   }
 }
