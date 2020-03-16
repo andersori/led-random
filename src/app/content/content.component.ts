@@ -264,9 +264,9 @@ export class ContentComponent implements OnInit, AfterViewInit {
     }
 
     if (this.erroParti === false) {
-      this.infoParticipante = `${this.participante.name} seja bem vindo.`;
+      this.infoParticipante = `${this.participante.name} seja bem-vindo(a).`;
       if (this.participante.idTeam === null) {
-        this.msgParti = `Olá ${this.participante.name.split(' ')[0]}. Você ainda não faz parte de uma equipe. Requisite uma equipe.`
+        this.msgParti = `Olá ${this.participante.name.split(' ')[0]}. Você ainda não faz parte de uma equipe. Requisite uma.`
       } else {
         this.msgParti = `Você faz parte da equipe ${this.equipe.name}.`;
         this.legenda = `Olá ${this.participante.name.split(' ')[0]}. Você faz parte da equipe ${this.equipe.name}.`;
