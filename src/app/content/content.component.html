@@ -63,13 +63,13 @@
     </mat-expansion-panel-header>
 
     <div *ngIf="participante === null || equipe === null">
-      <p>Forneça esses dados somente se sua equipe não fizer parte de um grupo.</p>
+      <p>Forneça esses dados somente se sua equipe não fizer parte de uma casa.</p>
       <mat-horizontal-stepper linear #stepperEquipe>
         <mat-step [stepControl]="equipeIdFormGroup" errorMessage="ID da equipe é obrigatório.">
           <form [formGroup]="equipeIdFormGroup">
             <ng-template matStepLabel>Forneça o ID</ng-template>
             <mat-form-field>
-              <mat-label>ID</mat-label>
+              <mat-label>ID da equipe</mat-label>
               <input matInput type="number" autocomplete="off" formControlName="equipeId" required>
             </mat-form-field>
             <div>
@@ -79,9 +79,9 @@
         </mat-step>
         <mat-step [stepControl]="equipeSecretFormGroup" errorMessage="Secret Code é obrigatório.">
           <form [formGroup]="equipeSecretFormGroup">
-            <ng-template matStepLabel>Forneça seu Secret Code</ng-template>
+            <ng-template matStepLabel>Forneça o Secret Code</ng-template>
             <mat-form-field>
-              <mat-label>Secret</mat-label>
+              <mat-label>Secret da equipe</mat-label>
               <input matInput placeholder="Ex. LLSA2Z" maxlength="6" autocomplete="off" autocorrect="off"
                 autocapitalize="off" spellcheck="false" #secretTeam
                 (input)="secretTeam.value=$event.target.value.toUpperCase()" formControlName="equipeSecret" required>
